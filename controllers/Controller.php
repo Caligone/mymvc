@@ -4,14 +4,14 @@
 	*/
 	class Controller
 	{
-		function __construct(argument)
+		function __construct()
 		{
 			# code...
 		}
 
-		function render($viewName, $parameters)
+		function render($viewName, $viewParam = null)
 		{
-			# code...
+			require(Path.'views/'.$viewName.'.php');
 		}
 	}	
 ?>

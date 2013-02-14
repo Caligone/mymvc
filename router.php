@@ -1,50 +1,53 @@
 <?php
-	include_once("config.php");
+	require("config.php");
 
 	// Traitement de l'URL
-	$routingArray = explode('/', $_SERVER['REQUEST_URI']);
+	$routingArray = explode('/', $_GET['parameters']);
 
-	if(isset($routingArray[2]) && !empty($routingArray[2]))
-		$controllerName = $routingArray[2];
-	if(isset($routingArray[3]) && !empty($routingArray[3]))
-		$actionName = $routingArray[3];
-	
-	$i = 4;
+	if(isset($routingArray[0]) && !empty($routingArray[0]))
+		$controllerName = $routingArray[0];
+	else
+		$controllerName = 'Main';
+	if(isset($routingArray[1]) && !empty($routingArray[1]))
+		$actionName = $routingArray[1];
+	else
+		$actionName = 'Index';
+
+
+	$i = 2;
+	$parameters = array();
 	while(isset($routingArray[$i]) && !empty($routingArray[$i]))
 	{
 		$parameters[] = $routingArray[$i];
 		$i++;
 	}
 
-	// Inclusion du controlleur
-	if(!isset($controllerName) || empty($controllerName))
-	{
-		$controllerName = 'Main';
-	}
-	// Erreur 404
+	// Vérification du controlleur
 	if(!file_exists('controllers/'.$controllerName.'Controller.php'))
 	{
 		$error = 'Le controlleur <em>'.$controllerName.'</em> est introuvable !';
-		include('404.php');
+		require('404.php');
 		die();
 	}
-	include_once('controllers/'.$controllerName.'Controller.php');
+	require('controllers/'.$controllerName.'Controller.php');
 
 	$controllerName .= 'Controller';
 	$controller = new $controllerName();
 
-	// Execution de l'action
-	if(!isset($actionName) || empty($actionName))
-	{
-		$actionName = 'index';
-	}
+	// Vérification de l'action
 	if(!is_callable(array($controller, $actionName.'Action')))
 	{
 		$error = 'L\'action <em>'.$actionName.'</em> est introuvable !';
-		include('404.php');
+		require('404.php');
 		die();
 	}
 	$actionName .= 'Action';
 
-	$controller->$actionName($parameters);
+	if((new ReflectionMethod($controllerName, $actionName))->getNumberOfRequiredParameters() > count($parameters))
+	{
+		$error = 'Les paramètres de <em>'.$controllerName.'->'.$actionName.'</em> sont incorrects !';
+		require('404.php');
+		die();
+	}
+	call_user_func_array(array($controller, $actionName), $parameters);
 ?>

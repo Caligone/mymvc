@@ -1,4 +1,5 @@
 <?php
+	require('Controller.php');
 	/**
 	* 
 	*/
@@ -9,9 +10,9 @@
 		
 		}
 
-		function indexAction($param)
+		function indexAction()
 		{
-			echo 'HelloWorld !';
+			$this->render('home');
 		}
 	}
 ?>
