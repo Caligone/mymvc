@@ -1,5 +1,5 @@
 <?php
-	require("config.php");
+	require("Configuration.php");
 
 	// Traitement de l'URL
 	$routingArray = explode('/', $_GET['parameters']);
@@ -25,8 +25,8 @@
 	// Vérification du controlleur
 	if(!file_exists('controllers/'.$controllerName.'Controller.php'))
 	{
-		$error = 'Le controlleur <em>'.$controllerName.'</em> est introuvable !';
-		require('404.php');
+		require("controllers/ErrorController.php");
+		call_user_func_array(array(new ErrorController(), 'unknownControllerAction'), array($controllerName));
 		die();
 	}
 	require('controllers/'.$controllerName.'Controller.php');
@@ -37,8 +37,8 @@
 	// Vérification de l'action
 	if(!is_callable(array($controller, $actionName.'Action')))
 	{
-		$error = 'L\'action <em>'.$actionName.'</em> est introuvable !';
-		require('404.php');
+		require("controllers/ErrorController.php");
+		call_user_func_array(array(new ErrorController(), 'unknownActionAction'), array($controllerName, $actionName));
 		die();
 	}
 	$actionName .= 'Action';

@@ -20,7 +20,7 @@
 		<div class="debugMode">
 			<h3>DebugMode</h3>
 			<?php 
-				echo $error.'<br/>';
+				echo $viewParam['errorMessage'].'<br/>';
 				echo 'Request URI : '.$_SERVER['REQUEST_URI'].'<br/>';
 				echo 'Root : '.Root.'<br/>';
 				echo 'Path : '.Path.'<br/>';
