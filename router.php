@@ -1,5 +1,5 @@
 <?php
-	require("Configuration.php");
+	require_once("Configuration.php");
 
 	// Traitement de l'URL
 	$routingArray = explode('/', $_GET['parameters']);
@@ -25,11 +25,11 @@
 	// Vérification du controlleur
 	if(!file_exists('controllers/'.$controllerName.'Controller.php'))
 	{
-		require("controllers/ErrorController.php");
+		require_once("controllers/ErrorController.php");
 		call_user_func_array(array(new ErrorController(), 'unknownControllerAction'), array($controllerName));
 		die();
 	}
-	require('controllers/'.$controllerName.'Controller.php');
+	require_once('controllers/'.$controllerName.'Controller.php');
 
 	$controllerName .= 'Controller';
 	$controller = new $controllerName();
@@ -37,7 +37,7 @@
 	// Vérification de l'action
 	if(!is_callable(array($controller, $actionName.'Action')))
 	{
-		require("controllers/ErrorController.php");
+		require_once("controllers/ErrorController.php");
 		call_user_func_array(array(new ErrorController(), 'unknownActionAction'), array($controllerName, $actionName));
 		die();
 	}
@@ -46,7 +46,7 @@
 	if((new ReflectionMethod($controllerName, $actionName))->getNumberOfRequiredParameters() > count($parameters))
 	{
 		$error = 'Les paramètres de <em>'.$controllerName.'->'.$actionName.'</em> sont incorrects !';
-		require('404.php');
+		require_once('404.php');
 		die();
 	}
 	call_user_func_array(array($controller, $actionName), $parameters);
