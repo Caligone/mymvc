@@ -48,7 +48,6 @@
 				$param = substr($param, 0, strlen($param)-2);
 				$req = "UPDATE site_".str_replace('model', '', strtolower(get_class($this)))." SET ".$param." WHERE id=".$this->id;
 			}
-			echo $req;
 			$this->connection->query($req);
 		}
 
@@ -62,6 +61,9 @@
 
 			$results = array();
 			$i = 0;
+
+			if(!is_object($data))
+				return array();
 			foreach ($data as $row)
 			{
 				$results[$i] = new $this->modelName();
@@ -85,6 +87,9 @@
 
 			$results = array();
 			$i = 0;
+
+			if(!is_object($data))
+				return array();
 			foreach ($data as $row)
 			{
 				$results[$i] = new $this->modelName();

@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require_once("Configuration.php");
 
 	// Traitement de l'URL
@@ -43,10 +44,12 @@
 	}
 	$actionName .= 'Action';
 
+	// Vérification du nombre de paramètres
 	if((new ReflectionMethod($controllerName, $actionName))->getNumberOfRequiredParameters() > count($parameters))
 	{
+		require_once("controllers/ErrorController.php");
 		$error = 'Les paramètres de <em>'.$controllerName.'->'.$actionName.'</em> sont incorrects !';
-		require_once('404.php');
+		call_user_func_array(array(new ErrorController(), 'mainAction'), array($error));
 		die();
 	}
 	call_user_func_array(array($controller, $actionName), $parameters);
