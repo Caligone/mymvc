@@ -9,7 +9,12 @@
 	define("DBHost", "localhost");
 	define("DBLogin", "root");
 	define("DBPassword", "root");
-	define("DBName", "mydb");
+	define("DBName", "dbname");
+
+	define("Password", "mdp");
+
+	define("DefaultController", "Main");
+	define("DefaultAction", "index");
 
 	// Activation du mode debug
 	if(DebugMode)

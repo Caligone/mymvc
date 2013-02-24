@@ -16,7 +16,11 @@
 
 		function renderHome()
 		{
-			require_once(Path.'views/Main/homeView.php');
+			$controllerName = DefaultController.'Controller';
+			$actionName = DefaultAction.'Action';
+			require_once($controllerName.'.php');
+			$controller = new $controllerName();
+			call_user_func_array(array($controller, $actionName), array());
 		}
 	}	
 ?>

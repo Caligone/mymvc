@@ -13,11 +13,11 @@
 	if(isset($routingArray[0]) && !empty($routingArray[0]))
 		$controllerName = $routingArray[0];
 	else
-		$controllerName = 'Main';
+		$controllerName = DefaultController;
 	if(isset($routingArray[1]) && !empty($routingArray[1]))
 		$actionName = $routingArray[1];
 	else
-		$actionName = 'Index';
+		$actionName = DefaultAction;
 
 
 	$i = 2;
