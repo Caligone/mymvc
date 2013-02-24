@@ -1,4 +1,9 @@
 <?php
+	/**
+	 * Router permettant de rediriger le trafic du site vers le contrôleur correspondant
+	 * Les URLs sont de la forme hostname/controleur/action/paramètre1/paramètre2/etc.
+	 * Si le contrôleur, l'action ou les paramètres sont invalides, on appelle le contrôleur de gestion d'erreur
+	 */
 	session_start();
 	require_once("Configuration.php");
 

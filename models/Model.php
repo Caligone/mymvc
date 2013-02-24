@@ -1,7 +1,8 @@
 <?php
 	require_once('Connection.php');
 	/**
-	* 
+	* Classe Model
+	* Représente une ligne dans la base de données sous forme d'objet
 	*/
 	class Model
 	{
