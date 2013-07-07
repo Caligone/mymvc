@@ -4,14 +4,14 @@
 	<title>Erreur 404</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 	<!--[if lt IE 9]>
-	<script src="asserts/js/404.js"></script>
+	<script src="assets/js/404.js"></script>
 	<![endif]-->
-	<link rel="stylesheet" href="<?php echo Root; ?>asserts/css/reset404.css">
-	<link rel="stylesheet" href="<?php echo Root; ?>asserts/css/fonts404.css">
-	<link rel="stylesheet" href="<?php echo Root; ?>asserts/css/screen404.css">
+	<link rel="stylesheet" href="<?php echo Root; ?>assets/css/reset404.css">
+	<link rel="stylesheet" href="<?php echo Root; ?>assets/css/fonts404.css">
+	<link rel="stylesheet" href="<?php echo Root; ?>assets/css/screen404.css">
 </head>
 <body>
-	<img src="<?php echo Root; ?>asserts/img/404.png" alt="404" width="610" height="213" />
+	<img src="<?php echo Root; ?>assets/img/404.png" alt="404" width="610" height="213" />
 	<a href="<?php echo "http://".Homepage; ?>">
 		<span class="text">Vous êtes perdu? Cliquez ici.</span>
 		<span class="hover"></span>
